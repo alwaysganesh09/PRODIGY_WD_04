@@ -49,16 +49,45 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('section').forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(20px)';
-    section.style.transition = 'all 0.5s ease-out';
-    observer.observe(section);
-});
-const themeToggle = document.getElementById('theme-toggle');
-const themeIcon = themeToggle.querySelector('.theme-icon');
+document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+    const navItems = document.querySelectorAll(".nav-links a"); // Select all menu links
+    const themeToggle = document.getElementById("theme-toggle");
+    const themeIcon = themeToggle.querySelector(".theme-icon");
 
-themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-theme');
-    themeIcon.textContent = document.body.classList.contains('dark-theme') ? '🌙' : '🌞';
+    // Toggle mobile menu
+    menuToggle.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+    });
+
+    // Close mobile menu when a link is clicked
+    navItems.forEach(item => {
+        item.addEventListener("click", function () {
+            navLinks.classList.remove("active"); // Close menu
+        });
+    });
+
+    // Toggle Dark Mode
+    themeToggle.addEventListener("click", function () {
+        document.body.classList.toggle("dark-theme");
+        themeIcon.textContent = document.body.classList.contains("dark-theme") ? "🌙" : "🌞";
+    });
+
+    // Fade-in effect for sections
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll("section").forEach(section => {
+        section.style.opacity = "0";
+        section.style.transform = "translateY(20px)";
+        section.style.transition = "all 0.5s ease-out";
+        observer.observe(section);
+    });
 });

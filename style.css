@@ -12,17 +12,12 @@
     box-sizing: border-box;
 }
 
+/* General Styles */
 body {
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background 0.3s, color 0.3s;
 }
 
 /* Navigation */
@@ -46,9 +41,10 @@ nav {
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--primary-color);
+    color: #333;
 }
 
+/* Navigation Links */
 .nav-links {
     display: flex;
     list-style: none;
@@ -57,17 +53,55 @@ nav {
 
 .nav-links a {
     text-decoration: none;
-    color: var(--text-color);
+    color: #333;
     font-weight: 500;
     transition: color 0.3s;
 }
 
 .nav-links a:hover {
-    color: var(--primary-color);
+    color: #007bff;
 }
 
+/* Theme Toggle */
+#theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
 
+/* Mobile Menu */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: white;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
 
 
 
@@ -878,4 +912,30 @@ h2, h3 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: rainbow 6s infinite linear;
+}
+/* Dark Theme */
+.dark-theme {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+/* Apply dark mode styles to the navigation */
+.dark-theme nav {
+    background-color: #111827;
+}
+
+.dark-theme .nav-links {
+    background-color: #111827;
+}
+
+.dark-theme .nav-links a {
+    color: white;
+}
+
+.dark-theme .nav-links a:hover {
+    color: #f39c12;
+}
+.dark-theme .menu-toggle a
+{
+ color:#ffffff
 }
