@@ -55,3 +55,10 @@ document.querySelectorAll('section').forEach(section => {
     section.style.transition = 'all 0.5s ease-out';
     observer.observe(section);
 });
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle.querySelector('.theme-icon');
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-theme');
+    themeIcon.textContent = document.body.classList.contains('dark-theme') ? '🌙' : '🌞';
+});
