@@ -137,6 +137,10 @@
                         <input type="email" id="email" name="email" required placeholder="Your Email">
                     </div>
                     <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Your Phone Number">
+                    </div>
+                    <div class="form-group">
                         <label for="message">Message</label>
                         <textarea id="message" name="message" required placeholder="Your Message"></textarea>
                     </div>
@@ -147,44 +151,37 @@
         </div>
     
         <script>
-              const scriptURL = 'https://script.google.com/macros/s/AKfycbzm9uLMhliHUSEL3ODPZG_waYR8cFP2RY6L422LBuUOxDH8hbeYJV5WYeRL6_lCb3qU/exec';
-
+              const scriptURL = 'https://script.google.com/macros/s/AKfycbxu47CmBrI4aif3mteheBqv1E9iXt6gfQlxH2GLOYDodBcjmUBhea5_h_5b-IvO67Qd/exec';
+    
             const form = document.forms['contact-form'];
             const formStatus = document.getElementById('form-status');
     
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 
-                // Disable the button and show sending status
                 const submitButton = form.querySelector('button');
                 submitButton.disabled = true;
                 submitButton.textContent = 'Sending...';
     
-                // Clear any previous status messages
                 formStatus.textContent = '';
     
-                // Create a FormData object and send the data using Fetch API
                 const formData = new FormData(form);
                 fetch(scriptURL, { method: 'POST', body: formData })
                     .then(response => {
                         if (response.ok) {
-                            // Success: show a success message and reset the form
                             formStatus.textContent = 'Your message has been sent successfully!';
                             formStatus.style.color = 'green';
                             form.reset();
                         } else {
-                            // Server error: show an error message
                             formStatus.textContent = 'Error! Please try again later.';
                             formStatus.style.color = 'red';
                         }
                     })
                     .catch(error => {
-                        // Catch network errors and show an error message
                         formStatus.textContent = 'Error! Unable to send your message.';
                         formStatus.style.color = 'red';
                     })
                     .finally(() => {
-                        // Re-enable the submit button and reset text
                         submitButton.disabled = false;
                         submitButton.textContent = 'Send Message';
                     });
